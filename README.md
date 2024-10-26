@@ -1,50 +1,54 @@
-# React + TypeScript + Vite
+# Calculadora de Propinas y Consumo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación en React y TypeScript que permite calcular propinas y totales de consumo en un restaurante. Los usuarios pueden seleccionar elementos de un menú, elegir un porcentaje de propina, y ver los totales calculados automáticamente.
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Menú Interactivo**: Selecciona elementos del menú para agregarlos a la orden.
+- **Cálculo de Propina**: Elige entre varios porcentajes de propina predefinidos.
+- **Resumen de la Orden**: Ve un resumen detallado de la orden, incluyendo subtotal, propina, y total.
+- **Función de Guardado**: Guarda la orden, que reinicia la lista de pedidos.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Componentes Principales
 
-- Configure the top-level `parserOptions` property like this:
+### App.tsx
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Componente principal que contiene la estructura de la aplicación. Incluye:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+    * MenuItem: Muestra los elementos del menú.
+    * OrderContents: Lista los elementos agregados a la orden.
+    * TipPercentageForm: Permite seleccionar el porcentaje de propina.
+    * OrderTotals: Muestra los totales de la orden y calcula la propina y el total.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## useOrder.ts
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Custom Hook que maneja el estado de la orden:
+
+    * Funciones: addItem, removeItem, placeOrder.
+    * Estados: order (orden actual) y tip (porcentaje de propina).
+
+## OrderContents.tsx
+
+### Muestra la lista de elementos de la orden con:
+
+    * Nombre, precio, y cantidad de cada elemento.
+    * Botón para eliminar elementos de la orden.
+
+## OrderTotals.tsx
+
+### Calcula y muestra:
+
+    * Subtotal
+    * Propina
+    * Total
+    * Botón para guardar la orden.
+
+## TipPercentageForm.tsx
+
+ * Formulario que permite seleccionar el porcentaje de propina, mostrando opciones del 10%, 20%, y 50%.
+
+### Se utilizan clases de Tailwind CSS para el diseño de la interfaz.
+
+Licencia
+Este proyecto está bajo la Licencia MIT.
